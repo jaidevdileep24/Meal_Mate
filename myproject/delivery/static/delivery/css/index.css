@@ -1,0 +1,47 @@
+.indcon {
+    margin-top: -20em;
+}
+
+.index {
+    background-image: url('../images/Untitled\ design.jpg');
+
+    background-size: cover;
+    overflow: hidden;
+    z-index: -1;
+    height: 115vh;
+    width: 115vw;
+    margin-top: -10em;
+    margin-left: -5em;
+    position: fixed;
+    
+}
+
+#content {
+    display: flex;
+    align-items: center;
+    margin-top: 28%; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right:10em ;
+}
+
+#text {
+    color: rgb(250, 164, 3);
+}
+button {
+    background-color: greenyellow;
+    height: 2em;
+    width: 8em;
+    border: none;
+    text-decoration: none;
+    color: black;
+    border-radius: 2px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-size: medium;
+    font-weight: 800;
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Delivery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #63442F;
+        }
+
+        #bnav {
+            position: fixed;
+            background-color: #63442F;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 105%;
+            margin-top: -6em;
+            margin-left: -2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .blogo {
+            display: flex;
+            align-items: center;
+        }
+
+        .blogo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .bnav-links {
+            display: flex;
+            gap: 10px;
+            margin-right: 5em;
+        }
+
+        .bnav-links a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .bnav-links a:hover {
+            background-color: rgba(250, 233, 75, 0.61);
+            transform: scale(1.1);
+        }
+
+        #bthome {
+            text-decoration: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        body {
+            padding-top: 70px; /* Adjust this value to create the desired gap */
+        }
+
+        .bcontainer {
+            padding: 20px;
+        }
+
+        #bh2:hover {
+            background: rgba(250, 233, 75, 0.61);
+            height: 150%;
+            width: 100%;
+            border: 1px solid rgba(250, 233, 75, 0.61);
+            border-radius: 5px;
+        }
+
+        .table-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #bc6328;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            color: white;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            border: 2px solid black;
+        }
+        th {
+            background-color: #4CAF50;
+            border: 2px solid black;
+            color: white;
+        }
+        tr {
+            background-color: #bc6328;
+            color: white;
+            font-size: larger;
+            font-weight: 20px;
+        }
+        img {
+            max-height: 150px;
+            max-width: 150px;
+            object-fit: cover;
+        }
+        button {
+            width: 100%;
+            height: 3em;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            text-decoration: none;
+            font-size: larger;
+            font-weight: 20px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="bcontainer">
+        <nav id="bnav">
+            <div class="blogo">
+                <a href="{% url 'delivery:index' %}" id="bthome">
+                    <h2 style="color: white" id="bh2">Food Delivery</h2>
+                </a>
+            </div>
+            <div class="bnav-links">
+                <a href="{% url 'delivery:cusdisplay' username %}">View Restaurants</a>
+                <a href="{% url 'delivery:add_res' %}">Add Restaurant</a>
+                <a href="{% url 'delivery:signin' %}">Sign In</a>
+                <a href="{% url 'delivery:signup' %}">Sign Up</a>
+            </div>
+        </nav>
+
+        <div style="margin-top: 20px"> 
+            <h1> Hi {{username}} Explore the menu...!</h1>
+            <div class="table-container">
+                <table style="border: 2px solid black;">
+                    <tr>
+                        <th>Restaurant Name</th>
+                        <th>Category</th>
+                        <th>Rating</th>
+                        <th>Image</th>
+                        <th>Address</th>
+                        <th>View Menu</th>
+                    </tr>
+                    {% for item in li %}
+                    <tr>
+                        <td>{{item.res_name}}</td>
+                        <td>{{item.food_cat}}</td>
+                        <td>{{item.rating}}</td>
+                        <td>
+                            <img src="{{item.img}}" alt="Restaurant Image" height="100" width="100" />
+                        </td>
+                        <td>{{item.res_address}}</td>
+                        <td>
+                            <a href="{% url 'delivery:cusview_menu' item.id username %}">
+                                <button>View Menu</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

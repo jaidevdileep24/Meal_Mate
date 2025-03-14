@@ -1,0 +1,157 @@
+{% extends 'delivery/cusbase.html' %} 
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu - {{ res.res_name }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #63442F;
+            color: white;
+        }
+
+        .bcontainer {
+            padding: 20px;
+        }
+
+        h2, p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            padding: 20px;
+            background-color: #3e2723;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 2px solid #4CAF50;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        th:hover {
+            background-color: rgba(250, 233, 75, 0.61);
+            transform: scale(1.05);
+        }
+
+        tr {
+            background-color: #bc6328;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover {
+            background-color: #d97a3f;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center; /* Center the buttons horizontally */
+            margin-top: 20px;
+        }
+
+        button {
+            height: 3em;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .actions button {
+            width: auto;
+            padding: 0 20px; /* Add padding for better spacing */
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="bcontainer">
+        <h2>Menu for {{ res.res_name }}</h2>
+        <p>Address: {{ res.address }}</p>
+        <p>Category: {{ res.Food_cat }}</p>
+        <p>Rating: {{ res.rating }}</p>
+        <a href="{% url 'delivery:show_cart' username %}">Show Cart</a>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+                {% for item in menu %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.des }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>{% if item.is_avail %}Available{% else %}Not Available{% endif %}</td>
+                    <td>{{ item.category }}</td>
+                    <td class="actions">
+                        <a href="{% url 'delivery:add_to_cart' item.id username %}" 
+                           onclick="return confirm('Are you sure you want to ADD this item to cart');">
+                            <button>Add To Cart</button>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No menu items available.</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'delivery:add_menu' res.id %}">
+                <button>Add Menu</button>
+            </a>
+            <a href="{% url 'delivery:add_res' %}">
+                <button>Add Restaurant</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

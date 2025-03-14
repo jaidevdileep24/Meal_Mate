@@ -1,0 +1,121 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'delivery/css/index.css' %}">
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        
+        nav {
+            position: fixed;
+            background-color: #63442F;
+            padding: 15px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 105%;
+            margin-top:-2em;
+            margin-left:-2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000; 
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            margin-right:5em;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color:rgba(250, 233, 75, 0.61);
+            transform: scale(1.1);
+        }
+        
+        #thome {
+            text-decoration: none;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        body {
+            background-color: #f0f0f0; /* Light background color for the body */
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        h2:hover {
+          background:rgba(250, 233, 75, 0.61);
+          heigh:150%;
+          width:100%;
+          border:1px solid rgba(250, 233, 75, 0.61);
+          border-radius:5px;
+        }
+        
+        </style>
+    </head>
+    <body>
+      <div class="container">
+        <nav>
+          <div class="logo">
+              <a href="{% url 'delivery:index' %}" id="thome">
+                  <h2 style="color: white">Food Delivery</h2>
+              </a>
+          </div>
+          <div class="nav-links">
+              <a href="{% url 'delivery:signin' %}">Sign In</a>
+              <a href="{% url 'delivery:signup' %}">Sign Up</a>
+          </div> 
+        </nav>
+        <div style="height:3em"><div></div>
+      </div>
+        <div class="index">
+            <div id="content">
+                <div id="text">
+                    <h1>Welcome to MealMate</h1>
+                </div>
+                <div id="urls">
+                    <button><a href="{% url 'delivery:signin' %}">Sign In</a></button>
+                    <button><a href="{% url 'delivery:signup' %}">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}
